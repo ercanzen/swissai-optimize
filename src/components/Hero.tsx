@@ -1,25 +1,106 @@
+import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
-import type { Lang, Translation } from '../i18n'
+import type { Translation } from '../i18n'
 
 const VIDEO_URL = '/hero-video.mp4'
+const WORD_EASE = [0.16, 1, 0.3, 1] as const
 
-const LANGS: Lang[] = ['de', 'en', 'fr', 'it']
-
-function EyePill() {
+function Word({ children, index, className = '' }: { children: string; index: number; className?: string }) {
   return (
-    <span className="w-[16px] md:w-[42px] lg:w-[62px] border-[2px] border-[#1a1a1a] rounded-full inline-flex items-center justify-center align-middle mx-1 py-0.5 md:py-1.5">
-      <span className="w-2 h-2 rounded-full bg-[#1a1a1a]" />
-    </span>
+    <motion.span
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: WORD_EASE }}
+      className={`inline-block ${className}`}
+    >
+      {children}
+      <>&nbsp;</>
+    </motion.span>
   )
 }
 
-interface HeroProps {
-  t: Translation
-  lang: Lang
-  setLang: (l: Lang) => void
+function EyePill({ index }: { index: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: WORD_EASE }}
+      className="w-[16px] md:w-[42px] lg:w-[62px] border-[2px] border-[#1a1a1a] rounded-full inline-flex items-center justify-center align-middle mx-1 py-0.5 md:py-1.5"
+    >
+      <span className="w-2 h-2 rounded-full bg-[#1a1a1a]" />
+    </motion.span>
+  )
 }
 
-export default function Hero({ t, lang, setLang }: HeroProps) {
+function AnimatedHeadline({ t }: { t: Translation }) {
+  const darkWords = t.headDark.split(' ')
+  const grayWords1 = t.headGray1.split(' ')
+  const line2Words = t.headLine2.split(' ')
+  const line3aWords = t.headLine3a.split(' ')
+  const line3bWords = t.headLine3b.split(' ')
+
+  let i = 0
+  const darkIdx = darkWords.map(() => i++)
+  const gray1Idx = grayWords1.map(() => i++)
+  const line2Idx = line2Words.map(() => i++)
+  const line3aIdx = line3aWords.map(() => i++)
+  const pillIdx = i++
+  const line3bIdx = line3bWords.map(() => i++)
+
+  return (
+    <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.12]">
+      {darkWords.map((w, idx) => (
+        <Word key={`d${idx}`} index={darkIdx[idx]} className="text-[#1a1a1a]">
+          {w}
+        </Word>
+      ))}
+      {grayWords1.map((w, idx) => (
+        <Word key={`g1${idx}`} index={gray1Idx[idx]} className="text-[#8e8e8e]">
+          {w}
+        </Word>
+      ))}
+      <br />
+      {line2Words.map((w, idx) => (
+        <Word key={`l2${idx}`} index={line2Idx[idx]} className="text-[#8e8e8e]">
+          {w}
+        </Word>
+      ))}
+      <br />
+      {line3aWords.map((w, idx) => (
+        <Word key={`l3a${idx}`} index={line3aIdx[idx]} className="text-[#8e8e8e]">
+          {w}
+        </Word>
+      ))}
+      <EyePill index={pillIdx} />
+      {line3bWords.map((w, idx) => (
+        <Word key={`l3b${idx}`} index={line3bIdx[idx]} className="text-[#8e8e8e]">
+          {w}
+        </Word>
+      ))}
+    </h1>
+  )
+}
+
+function useTypedPlaceholder(fullText: string) {
+  const [typed, setTyped] = useState('')
+
+  useEffect(() => {
+    setTyped('')
+    let i = 0
+    const id = setInterval(() => {
+      i++
+      setTyped(fullText.slice(0, i))
+      if (i >= fullText.length) clearInterval(id)
+    }, 45)
+    return () => clearInterval(id)
+  }, [fullText])
+
+  return typed
+}
+
+export default function Hero({ t }: { t: Translation }) {
+  const typedPlaceholder = useTypedPlaceholder(t.searchPlaceholder)
+
   return (
     <section className="relative min-h-[110vh] sm:min-h-[140vh] w-full flex flex-col items-center justify-start overflow-hidden bg-bg-base">
       {/* Background video */}
@@ -33,7 +114,10 @@ export default function Hero({ t, lang, setLang }: HeroProps) {
           className="w-full h-full object-cover opacity-100"
           src={VIDEO_URL}
         />
+        {/* Top mask: blend video into page background */}
         <div className="absolute top-0 left-0 w-full h-24 sm:h-32 bg-gradient-to-b from-bg-base to-transparent"></div>
+        {/* Left mask: keep headline readable over the video */}
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-base via-bg-base/55 to-transparent"></div>
       </div>
 
       {/* Hero content */}
@@ -52,34 +136,19 @@ export default function Hero({ t, lang, setLang }: HeroProps) {
             <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
           </motion.a>
 
-          {/* Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="font-display text-3xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-[1.12]"
-          >
-            <span className="text-[#1a1a1a]">{t.headDark} </span>
-            <span className="text-[#8e8e8e]">{t.headGray1}</span>
-            <br />
-            <span className="text-[#8e8e8e]">{t.headLine2}</span>
-            <br />
-            <span className="text-[#8e8e8e]">
-              {t.headLine3a} <EyePill /> {t.headLine3b}
-            </span>
-          </motion.h1>
+          <AnimatedHeadline t={t} />
 
-          {/* Search pill + CTA */}
+          {/* Search pill + CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4"
+            className="mt-8 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4"
           >
             <div className="bg-white rounded-[6px] border border-black/[0.05] p-1 pl-4 flex items-center shadow-sm w-full max-w-sm">
               <input
                 type="text"
-                placeholder={t.searchPlaceholder}
+                placeholder={typedPlaceholder}
                 className="flex-1 bg-transparent outline-none text-[14px] text-zinc-800 placeholder:text-zinc-400"
               />
               <button
@@ -110,23 +179,16 @@ export default function Hero({ t, lang, setLang }: HeroProps) {
               {t.cta}
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
             </a>
+
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 text-[13px] font-medium bg-[#1a1a1a] text-white rounded-full px-5 py-2.5 hover:bg-black transition-all duration-200 group whitespace-nowrap"
+            >
+              {t.consultCta}
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+            </a>
           </motion.div>
         </div>
-      </div>
-
-      {/* Edge anchor — language switcher (middle right) */}
-      <div className="absolute right-3 md:right-6 top-[48vh] -translate-y-1/2 z-20 flex flex-col items-center gap-1 rounded-full bg-white/40 backdrop-blur-md border border-white/50 shadow-sm px-1.5 py-2">
-        {LANGS.map((l) => (
-          <button
-            key={l}
-            onClick={() => setLang(l)}
-            className={`w-8 h-8 rounded-full text-[11px] lowercase font-medium transition-all duration-200 ${
-              lang === l ? 'bg-[#1a1a1a] text-white' : 'text-zinc-600 hover:bg-white/70'
-            }`}
-          >
-            {l}
-          </button>
-        ))}
       </div>
 
       {/* Edge anchor — bottom left */}

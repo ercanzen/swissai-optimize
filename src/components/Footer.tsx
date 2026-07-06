@@ -1,50 +1,42 @@
 import type { Translation } from '../i18n'
 
-const NAV_HREFS = ['#services', '#process', '#about', '#faq']
+function LinkedinIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+    </svg>
+  )
+}
 
 export default function Footer({ t }: { t: Translation }) {
   return (
-    <footer className="relative w-full border-t border-black/[0.05] bg-white/40 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-20 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-          <div className="md:col-span-6">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="flex items-center justify-center rounded-full w-10 h-10 bg-white/70 border border-white/60 shadow-sm">
-                <img src="/logo-mark.png" alt="SwissAI Optimize" className="w-6 h-6 object-contain" />
-              </span>
-              <span className="font-display text-[16px] font-medium text-[#1a1a1a]">SwissAI Optimize</span>
-            </div>
-            <p className="text-[13.5px] text-zinc-500 max-w-xs">{t.footer.tagline}</p>
-          </div>
-          <div className="md:col-span-3">
-            <h4 className="text-[12px] uppercase tracking-widest text-zinc-400 mb-4">{t.footer.nav}</h4>
-            <div className="flex flex-col gap-2.5">
-              {t.nav.map((link, i) => (
-                <a
-                  key={link}
-                  href={NAV_HREFS[i]}
-                  className="text-[13.5px] lowercase text-zinc-600 hover:text-[#1a1a1a] transition-colors w-fit"
-                >
-                  {link}
-                </a>
-              ))}
-            </div>
-          </div>
-          <div className="md:col-span-3">
-            <h4 className="text-[12px] uppercase tracking-widest text-zinc-400 mb-4">{t.footer.legal}</h4>
-            <div className="flex flex-col gap-2.5">
-              <a href="#" className="text-[13.5px] text-zinc-600 hover:text-[#1a1a1a] transition-colors w-fit">
-                {t.footer.impressum}
-              </a>
-              <a href="#" className="text-[13.5px] text-zinc-600 hover:text-[#1a1a1a] transition-colors w-fit">
-                {t.footer.datenschutz}
-              </a>
-            </div>
-          </div>
+    <footer className="relative w-full bg-[#1a1a1a]">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-3">
+          <img src="/logo-mark-white.png" alt="SwissAI Optimize" className="w-6 h-6 object-contain" />
+          <span className="font-display text-[14px] font-medium text-white">SwissAI Optimize</span>
         </div>
-        <div className="mt-12 pt-6 border-t border-black/[0.05] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <span className="text-[12px] text-zinc-400">© 2026 SwissAI Optimize</span>
-          <span className="text-[12px] text-zinc-400">{t.footer.madeIn} 🇨🇭</span>
+
+        <div className="flex items-center gap-6 order-3 md:order-2">
+          <a href="#" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
+            {t.footer.datenschutz}
+          </a>
+          <a href="#" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
+            {t.footer.impressum}
+          </a>
+        </div>
+
+        <a
+          href="#"
+          aria-label="LinkedIn"
+          className="order-2 md:order-3 text-zinc-400 hover:text-white transition-colors"
+        >
+          <LinkedinIcon />
+        </a>
+      </div>
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-4 text-center">
+          <span className="text-[12px] text-zinc-500">© 2026 SwissAI Optimize – {t.footer.address}</span>
         </div>
       </div>
     </footer>

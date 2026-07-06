@@ -2,10 +2,7 @@ import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Services from './components/Services'
-import Process from './components/Process'
-import Stats from './components/Stats'
-import About from './components/About'
-import Faq from './components/Faq'
+import Pricing from './components/Pricing'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { translations, type Lang } from './i18n'
@@ -30,15 +27,12 @@ export default function App() {
   }, [lang])
 
   return (
-    <div className="min-h-screen bg-bg-base selection:bg-brand-yellow selection:text-black">
-      <Navbar t={t} />
+    <div className="min-h-screen bg-white selection:bg-brand-yellow selection:text-black">
+      <Navbar t={t} lang={lang} setLang={setLang} />
       <main>
-        <Hero t={t} lang={lang} setLang={setLang} />
+        <Hero t={t} />
         <Services t={t} />
-        <Process t={t} />
-        <Stats t={t} />
-        <About t={t} />
-        <Faq t={t} />
+        <Pricing t={t} />
         <Contact t={t} />
       </main>
       <Footer t={t} />

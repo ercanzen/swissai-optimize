@@ -8,17 +8,21 @@ const CONTACT_EMAIL = 'info@swissai-optimize.ch'
 export default function Contact({ t }: { t: Translation }) {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [company, setCompany] = useState('')
+  const [service, setService] = useState('')
   const [message, setMessage] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`Anfrage von ${name}`)
-    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
+    const subject = encodeURIComponent(`Anfrage von ${name}${company ? ` (${company})` : ''}`)
+    const body = encodeURIComponent(
+      `${message}\n\n— ${name} (${email})\nUnternehmen: ${company}\nThema: ${service}`,
+    )
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
   }
 
   const inputClasses =
-    'w-full bg-white rounded-xl border border-black/[0.05] px-4 py-3 text-[14px] text-zinc-800 placeholder:text-zinc-400 outline-none focus:border-[#1a1a1a]/20 shadow-sm transition-colors'
+    'w-full bg-white rounded-xl border border-black/[0.08] px-4 py-3 text-[14px] text-zinc-800 placeholder:text-zinc-400 outline-none focus:border-[#1a1a1a]/30 shadow-sm transition-colors'
 
   return (
     <Section id="contact">
@@ -30,7 +34,6 @@ export default function Contact({ t }: { t: Translation }) {
             </h2>
             <p className="text-[15px] leading-relaxed text-zinc-500 max-w-md mb-8">{t.contactSection.subtitle}</p>
             <p className="text-[13.5px] text-zinc-500">
-              {t.contactSection.or}{' '}
               <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-[#1a1a1a] underline underline-offset-4 hover:no-underline">
                 {CONTACT_EMAIL}
               </a>
@@ -57,6 +60,28 @@ export default function Contact({ t }: { t: Translation }) {
                 className={inputClasses}
               />
             </div>
+            <input
+              type="text"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+              placeholder={t.contactSection.company}
+              className={inputClasses}
+            />
+            <select
+              required
+              value={service}
+              onChange={(e) => setService(e.target.value)}
+              className={`${inputClasses} ${service ? 'text-zinc-800' : 'text-zinc-400'}`}
+            >
+              <option value="" disabled>
+                {t.contactSection.servicePlaceholder}
+              </option>
+              {t.contactSection.serviceOptions.map((opt) => (
+                <option key={opt} value={opt} className="text-zinc-800">
+                  {opt}
+                </option>
+              ))}
+            </select>
             <textarea
               required
               value={message}

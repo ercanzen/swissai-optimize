@@ -28,7 +28,7 @@ export function SectionHeading({ title, subtitle }: { title: string; subtitle?: 
 
 export function Section({ id, children, className = '' }: { id: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={`relative w-full py-20 md:py-28 ${className}`}>
+    <section id={id} className={`relative w-full py-16 md:py-[120px] scroll-mt-24 ${className}`}>
       <div className="max-w-7xl w-full mx-auto px-8 md:px-16 lg:px-20">{children}</div>
     </section>
   )

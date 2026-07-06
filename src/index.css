@@ -9,6 +9,11 @@
   --color-bg-base: #edeef5;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
 body {
-  @apply bg-bg-base text-zinc-900 font-sans antialiased;
+  @apply bg-white text-zinc-900 font-sans antialiased;
 }
