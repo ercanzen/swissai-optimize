@@ -2,8 +2,10 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo-icon.png" />
-    <link rel="apple-touch-icon" href="/logo-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#EDEEF5" />
 
@@ -12,15 +14,17 @@
       name="description"
       content="SwissAI Optimize integriert KI in Ihr Unternehmen und sorgt dafür, dass ChatGPT, Perplexity und Google KI Sie kennen und empfehlen. Swiss made, in 4 Sprachen."
     />
+    <link rel="canonical" href="https://swissai-optimize.ch/" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://swissai-optimize.ch/" />
     <meta property="og:site_name" content="SwissAI Optimize" />
     <meta property="og:title" content="SwissAI Optimize — Sichtbarkeit in der KI-Suche" />
     <meta
       property="og:description"
       content="Ihre Kunden fragen längst nicht mehr Google — sie fragen die KI. Wir integrieren KI in Ihr Unternehmen und machen Sie dort sichtbar."
     />
-    <meta property="og:image" content="/og-image.jpg" />
+    <meta property="og:image" content="https://swissai-optimize.ch/og-image.jpg" />
     <meta property="og:locale" content="de_CH" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -29,7 +33,31 @@
       name="twitter:description"
       content="Ihre Kunden fragen längst nicht mehr Google — sie fragen die KI. Wir integrieren KI in Ihr Unternehmen und machen Sie dort sichtbar."
     />
-    <meta name="twitter:image" content="/og-image.jpg" />
+    <meta name="twitter:image" content="https://swissai-optimize.ch/og-image.jpg" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "SwissAI Optimize",
+        "url": "https://swissai-optimize.ch/",
+        "logo": "https://swissai-optimize.ch/logo-icon.png",
+        "image": "https://swissai-optimize.ch/og-image.jpg",
+        "description": "KI-Sichtbarkeit (AEO/GEO), Prozessautomatisierung und KI-Assistenten für Schweizer KMU.",
+        "email": "info@swissai-optimize.ch",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Aarestrasse 12",
+          "postalCode": "3052",
+          "addressLocality": "Zollikofen",
+          "addressRegion": "Bern",
+          "addressCountry": "CH"
+        },
+        "areaServed": "CH",
+        "availableLanguage": ["de", "en", "fr", "it"],
+        "sameAs": ["https://www.linkedin.com/company/110310581/"]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
