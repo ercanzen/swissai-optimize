@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import type { Translation } from '../i18n'
 
@@ -172,13 +173,13 @@ export default function Hero({ t }: { t: Translation }) {
               </button>
             </div>
 
-            <a
-              href="#contact"
+            <Link
+              to="/audit"
               className="inline-flex items-center gap-2 text-[13px] font-medium text-[#1a1a1a] border border-[#1a1a1a]/30 rounded-full px-5 py-2.5 hover:bg-[#1a1a1a] hover:text-white hover:border-[#1a1a1a] transition-all duration-200 group whitespace-nowrap"
             >
               {t.cta}
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-            </a>
+            </Link>
 
             <a
               href="#contact"

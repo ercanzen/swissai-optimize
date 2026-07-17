@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import Pricing from './components/Pricing'
-import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Landing from './pages/Landing'
+import Audit from './pages/Audit'
 import { translations, type Lang } from './i18n'
 
 const LANGS: Lang[] = ['de', 'en', 'fr', 'it']
@@ -29,12 +28,10 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white selection:bg-brand-yellow selection:text-black">
       <Navbar t={t} lang={lang} setLang={setLang} />
-      <main>
-        <Hero t={t} />
-        <Services t={t} />
-        <Pricing t={t} />
-        <Contact t={t} />
-      </main>
+      <Routes>
+        <Route path="/" element={<Landing t={t} />} />
+        <Route path="/audit" element={<Audit />} />
+      </Routes>
       <Footer t={t} />
     </div>
   )

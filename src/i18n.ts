@@ -45,6 +45,9 @@ export interface Translation {
     serviceOptions: string[]
     message: string
     send: string
+    sending: string
+    success: string
+    errorFallback: string
   }
   footer: {
     datenschutz: string
@@ -148,6 +151,9 @@ export const translations: Record<Lang, Translation> = {
       serviceOptions: ['AEO / GEO – KI-Sichtbarkeit', 'Prozess-Automatisierung', 'KI-Assistent', 'Sonstiges'],
       message: 'Ihre Nachricht',
       send: 'Anfrage senden',
+      sending: 'Wird gesendet...',
+      success: 'Danke! Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb von 24 Stunden.',
+      errorFallback: 'Der Versand hat leider nicht geklappt — wir öffnen stattdessen Ihr E-Mail-Programm.',
     },
     footer: {
       datenschutz: 'Datenschutz',
@@ -242,6 +248,9 @@ export const translations: Record<Lang, Translation> = {
       serviceOptions: ['AEO / GEO – AI visibility', 'Process automation', 'AI assistant', 'Other'],
       message: 'Your message',
       send: 'Send inquiry',
+      sending: 'Sending...',
+      success: "Thank you! Your request has reached us. We'll get back to you within 24 hours.",
+      errorFallback: "Sending didn't work — we'll open your email app instead.",
     },
     footer: {
       datenschutz: 'Privacy policy',
@@ -336,6 +345,9 @@ export const translations: Record<Lang, Translation> = {
       serviceOptions: ['AEO / GEO – visibilité IA', 'Automatisation des processus', 'Assistant IA', 'Autre'],
       message: 'Votre message',
       send: 'Envoyer la demande',
+      sending: 'Envoi en cours...',
+      success: 'Merci ! Votre demande nous est bien parvenue. Nous vous répondrons sous 24 heures.',
+      errorFallback: "L'envoi a échoué — nous ouvrons votre messagerie à la place.",
     },
     footer: {
       datenschutz: 'Confidentialité',
@@ -430,6 +442,9 @@ export const translations: Record<Lang, Translation> = {
       serviceOptions: ['AEO / GEO – visibilità IA', 'Automazione dei processi', 'Assistente IA', 'Altro'],
       message: 'Il tuo messaggio',
       send: 'Invia richiesta',
+      sending: 'Invio in corso...',
+      success: 'Grazie! La tua richiesta ci è arrivata. Ti risponderemo entro 24 ore.',
+      errorFallback: "L'invio non è riuscito — apriamo invece il tuo programma di posta.",
     },
     footer: {
       datenschutz: 'Privacy',

@@ -27,7 +27,9 @@ export default function Footer({ t }: { t: Translation }) {
         </div>
 
         <a
-          href="#"
+          href="https://www.linkedin.com/company/110310581/"
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label="LinkedIn"
           className="order-2 md:order-3 text-zinc-400 hover:text-white transition-colors"
         >

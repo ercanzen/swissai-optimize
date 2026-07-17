@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import type { Lang, Translation } from '../i18n'
 
@@ -6,7 +7,8 @@ function Logo() {
   return <img src="/logo-mark.png" alt="SwissAI Optimize" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
 }
 
-const NAV_HREFS = ['#services', '#pricing', '#contact']
+// Root-relative so these still work when the current route isn't "/" (e.g. /audit)
+const NAV_HREFS = ['/#services', '/#pricing', '/#contact']
 const LANGS: Lang[] = ['de', 'en', 'fr', 'it']
 
 function LangSwitcher({ lang, setLang, className = '' }: { lang: Lang; setLang: (l: Lang) => void; className?: string }) {
@@ -56,9 +58,9 @@ export default function Navbar({ t, lang, setLang }: NavbarProps) {
           <span className="flex items-center justify-center rounded-full w-10 h-10 sm:w-11 sm:h-11 shrink-0 bg-white/60 border border-white/50 backdrop-blur-md shadow-sm">
             <Logo />
           </span>
-          <a href="#" className="font-display text-[17px] font-medium tracking-tight text-[#1a1a1a]">
+          <Link to="/" className="font-display text-[17px] font-medium tracking-tight text-[#1a1a1a]">
             SwissAI&nbsp;Optimize
-          </a>
+          </Link>
         </div>
 
         {/* Center — desktop links */}
@@ -80,13 +82,13 @@ export default function Navbar({ t, lang, setLang }: NavbarProps) {
         <div className="col-span-6 md:col-span-3 flex items-center justify-end gap-3">
           <LangSwitcher lang={lang} setLang={setLang} className="hidden sm:flex" />
           <a
-            href="#contact"
+            href="/#contact"
             className="hidden lg:inline text-[13px] lowercase font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200"
           >
             {t.contact}
           </a>
           <motion.a
-            href="#contact"
+            href="/#contact"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
             className="hidden sm:inline-flex items-center gap-2 bg-[#1a1a1a] text-white text-[13px] lowercase font-medium rounded-full px-5 py-2.5 hover:bg-black transition-colors duration-200 group"
@@ -136,7 +138,7 @@ export default function Navbar({ t, lang, setLang }: NavbarProps) {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center justify-center gap-2 bg-[#1a1a1a] text-white text-[14px] lowercase font-medium rounded-full px-5 py-3 mt-2"
               >
