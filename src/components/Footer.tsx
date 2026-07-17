@@ -14,7 +14,7 @@ export default function Footer({ t }: { t: Translation }) {
     <footer className="relative w-full bg-[#1a1a1a]">
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-3">
-          <img src="/logo-mark-white.png" alt="SwissAI Optimize" className="w-6 h-6 object-contain" />
+          <img src="/logo-mark-white-nav.png" alt="SwissAI Optimize" className="w-6 h-6 object-contain" />
           <span className="font-display text-[14px] font-medium text-white">SwissAI Optimize</span>
         </div>
 
@@ -39,7 +39,7 @@ export default function Footer({ t }: { t: Translation }) {
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-4 text-center">
-          <span className="text-[12px] text-zinc-500">© 2026 SwissAI Optimize – {t.footer.address}</span>
+          <span className="text-[12px] text-zinc-400">© 2026 SwissAI Optimize – {t.footer.address}</span>
         </div>
       </div>
     </footer>

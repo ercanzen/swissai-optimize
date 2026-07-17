@@ -93,6 +93,7 @@ export default function Contact({ t }: { t: Translation }) {
               />
               <select
                 required
+                aria-label={t.contactSection.servicePlaceholder}
                 value={service}
                 onChange={(e) => setService(e.target.value)}
                 className={`${inputClasses} ${service ? 'text-zinc-800' : 'text-zinc-400'}`}

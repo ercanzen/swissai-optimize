@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import type { Lang, Translation } from '../i18n'
 
 function Logo() {
-  return <img src="/logo-mark.png" alt="SwissAI Optimize" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
+  return <img src="/logo-mark-nav.png" alt="SwissAI Optimize" className="w-6 h-6 sm:w-7 sm:h-7 object-contain" />
 }
 
 // Root-relative so these still work when the current route isn't "/" (e.g. /audit)
