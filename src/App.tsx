@@ -4,6 +4,8 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Landing from './pages/Landing'
 import Audit from './pages/Audit'
+import Impressum from './pages/Impressum'
+import Datenschutz from './pages/Datenschutz'
 import { translations, type Lang } from './i18n'
 
 const LANGS: Lang[] = ['de', 'en', 'fr', 'it']
@@ -31,6 +33,8 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing t={t} />} />
         <Route path="/audit" element={<Audit />} />
+        <Route path="/impressum" element={<Impressum />} />
+        <Route path="/datenschutz" element={<Datenschutz />} />
       </Routes>
       <Footer t={t} />
     </div>

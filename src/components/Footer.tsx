@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import type { Translation } from '../i18n'
 
 function LinkedinIcon() {
@@ -18,12 +19,12 @@ export default function Footer({ t }: { t: Translation }) {
         </div>
 
         <div className="flex items-center gap-6 order-3 md:order-2">
-          <a href="#" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
+          <Link to="/datenschutz" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
             {t.footer.datenschutz}
-          </a>
-          <a href="#" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
+          </Link>
+          <Link to="/impressum" className="text-[13px] text-zinc-400 hover:text-white transition-colors">
             {t.footer.impressum}
-          </a>
+          </Link>
         </div>
 
         <a
