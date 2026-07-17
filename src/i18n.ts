@@ -28,6 +28,26 @@ export interface Translation {
     learnMore: string
     items: { title: string; desc: string }[]
   }
+  stats: {
+    items: { value: number; suffix: string; label: string }[]
+  }
+  about: {
+    title: string
+    subtitle: string
+    paragraph: string
+    points: { title: string; desc: string }[]
+  }
+  testimonials: {
+    title: string
+    subtitle: string
+    badge: string
+    items: { quote: string; name: string; role: string }[]
+  }
+  faq: {
+    title: string
+    subtitle: string
+    items: { q: string; a: string }[]
+  }
   pricing: {
     title: string
     subtitle: string
@@ -94,6 +114,87 @@ export const translations: Record<Lang, Translation> = {
         {
           title: 'KI-Assistent',
           desc: 'Ein KI-Chatbot beantwortet Kundenanfragen rund um die Uhr — freundlich, präzise und in vier Sprachen.',
+        },
+      ],
+    },
+    stats: {
+      items: [
+        { value: 4, suffix: '', label: 'Sprachen im Einsatz' },
+        { value: 24, suffix: '/7', label: 'KI-Erreichbarkeit möglich' },
+        { value: 100, suffix: '%', label: 'Hosting & Support in der Schweiz' },
+        { value: 45, suffix: ' Min.', label: 'kostenlose Erstberatung' },
+      ],
+    },
+    about: {
+      title: 'Warum SwissAI Optimize',
+      subtitle: 'Schweizer Qualität, Schweizer Datenschutz — und ein Team, das erreichbar bleibt.',
+      paragraph:
+        'Wir sind ein Schweizer Team, das sich auf KI-Sichtbarkeit und Prozessautomatisierung für KMU spezialisiert hat. Statt Ihnen ein fertiges Paket zu verkaufen, schauen wir uns Ihr Unternehmen genau an und setzen dort an, wo es den grössten Unterschied macht.',
+      points: [
+        {
+          title: 'Made in Switzerland',
+          desc: 'Entwicklung, Hosting und Support aus der Schweiz — kurze Wege, direkter Kontakt.',
+        },
+        {
+          title: 'Datenschutz nach Schweizer Recht',
+          desc: 'Ihre Daten werden nach nDSG und DSGVO behandelt — keine Weitergabe an Dritte ohne Zustimmung.',
+        },
+        {
+          title: 'Persönliche Betreuung',
+          desc: 'Ein fester Ansprechpartner statt wechselnder Support-Tickets.',
+        },
+      ],
+    },
+    testimonials: {
+      title: 'Das sagen unsere Kunden',
+      subtitle: 'Beispielhafte Rückmeldungen — echte Kundenstimmen folgen in Kürze.',
+      badge: 'Beispiel',
+      items: [
+        {
+          quote:
+            'Wir wissen jetzt, wie wir in ChatGPT & Co. vorkommen — und was wir tun müssen, um dort sichtbar zu bleiben.',
+          name: 'A. B.',
+          role: 'Inhaber, Treuhandbüro',
+        },
+        {
+          quote: 'Die Rechnungsverarbeitung läuft jetzt automatisch. Das spart uns jede Woche mehrere Stunden.',
+          name: 'S. M.',
+          role: 'Geschäftsführerin, Handwerksbetrieb',
+        },
+        {
+          quote: 'Der KI-Chatbot beantwortet die häufigsten Kundenfragen — auch ausserhalb der Öffnungszeiten.',
+          name: 'D. R.',
+          role: 'Marketingleiter, KMU',
+        },
+      ],
+    },
+    faq: {
+      title: 'Häufige Fragen',
+      subtitle: 'Antworten auf die Fragen, die uns am häufigsten gestellt werden.',
+      items: [
+        {
+          q: 'Wie lange dauert ein KI-Projekt?',
+          a: 'Der Sichtbarkeits-Audit ist innerhalb einer Woche abgeschlossen. Laufende Optimierung und Automatisierung sind fortlaufende Prozesse — erste Resultate sehen Sie meist innerhalb von 4–6 Wochen.',
+        },
+        {
+          q: 'Wo werden meine Daten gespeichert?',
+          a: 'Ihre Daten werden in der Schweiz gehostet und gemäss nDSG sowie DSGVO verarbeitet. Details finden Sie in unserer Datenschutzerklärung.',
+        },
+        {
+          q: 'Muss ich mich langfristig binden?',
+          a: 'Nein. Der Audit ist ein einmaliges Angebot, die monatlichen Pakete sind jederzeit kündbar.',
+        },
+        {
+          q: 'In welchen Sprachen arbeiten Sie?',
+          a: 'Wir arbeiten auf Deutsch, Englisch, Französisch und Italienisch — passend zur Schweizer Kundschaft.',
+        },
+        {
+          q: 'Brauche ich technisches Vorwissen?',
+          a: 'Nein. Wir übernehmen die technische Umsetzung; Sie müssen nur Ihr Unternehmen und Ihre Ziele kennen.',
+        },
+        {
+          q: 'Wie starten wir?',
+          a: 'Am einfachsten mit einem kostenlosen 45-minütigen Erstgespräch — dort klären wir Ihre Ausgangslage und die nächsten Schritte.',
         },
       ],
     },
@@ -194,6 +295,87 @@ export const translations: Record<Lang, Translation> = {
         },
       ],
     },
+    stats: {
+      items: [
+        { value: 4, suffix: '', label: 'Languages supported' },
+        { value: 24, suffix: '/7', label: 'AI availability possible' },
+        { value: 100, suffix: '%', label: 'Hosting & support in Switzerland' },
+        { value: 45, suffix: ' min.', label: 'free initial consultation' },
+      ],
+    },
+    about: {
+      title: 'Why SwissAI Optimize',
+      subtitle: 'Swiss quality, Swiss data protection — and a team that stays reachable.',
+      paragraph:
+        "We're a Swiss team specialised in AI visibility and process automation for SMEs. Instead of selling you a fixed package, we look closely at your business and start where it makes the biggest difference.",
+      points: [
+        {
+          title: 'Made in Switzerland',
+          desc: 'Development, hosting and support from Switzerland — short paths, direct contact.',
+        },
+        {
+          title: 'Data protection under Swiss law',
+          desc: 'Your data is handled under the Swiss FADP and GDPR — no sharing with third parties without consent.',
+        },
+        {
+          title: 'Personal support',
+          desc: 'One fixed point of contact instead of rotating support tickets.',
+        },
+      ],
+    },
+    testimonials: {
+      title: 'What our clients say',
+      subtitle: 'Sample feedback — real client voices are coming soon.',
+      badge: 'Example',
+      items: [
+        {
+          quote:
+            "We now know how we show up in ChatGPT & co. — and what we need to do to stay visible there.",
+          name: 'A. B.',
+          role: 'Owner, fiduciary firm',
+        },
+        {
+          quote: 'Invoice processing now runs automatically. It saves us several hours every week.',
+          name: 'S. M.',
+          role: 'Managing Director, trades business',
+        },
+        {
+          quote: 'The AI chatbot answers the most common customer questions — even outside business hours.',
+          name: 'D. R.',
+          role: 'Head of Marketing, SME',
+        },
+      ],
+    },
+    faq: {
+      title: 'Frequently asked questions',
+      subtitle: 'Answers to the questions we get asked most often.',
+      items: [
+        {
+          q: 'How long does an AI project take?',
+          a: 'The visibility audit is completed within a week. Ongoing optimisation and automation are continuous processes — you usually see first results within 4–6 weeks.',
+        },
+        {
+          q: 'Where is my data stored?',
+          a: 'Your data is hosted in Switzerland and processed under the Swiss FADP and GDPR. Details are in our privacy policy.',
+        },
+        {
+          q: 'Do I need to commit long-term?',
+          a: 'No. The audit is a one-time offer, and the monthly plans can be cancelled anytime.',
+        },
+        {
+          q: 'What languages do you work in?',
+          a: 'We work in German, English, French and Italian — matching Swiss customers.',
+        },
+        {
+          q: 'Do I need technical knowledge?',
+          a: "No. We handle the technical implementation; you just need to know your business and your goals.",
+        },
+        {
+          q: 'How do we get started?',
+          a: 'The easiest way is a free 45-minute initial call, where we clarify your starting point and next steps.',
+        },
+      ],
+    },
     pricing: {
       title: 'Transparent pricing',
       subtitle: 'Choose the plan that fits your business. Cancel anytime.',
@@ -291,6 +473,87 @@ export const translations: Record<Lang, Translation> = {
         },
       ],
     },
+    stats: {
+      items: [
+        { value: 4, suffix: '', label: 'Langues prises en charge' },
+        { value: 24, suffix: '/7', label: 'Disponibilité IA possible' },
+        { value: 100, suffix: '%', label: 'Hébergement & support en Suisse' },
+        { value: 45, suffix: ' min.', label: 'première consultation gratuite' },
+      ],
+    },
+    about: {
+      title: 'Pourquoi SwissAI Optimize',
+      subtitle: 'Qualité suisse, protection des données suisse — et une équipe joignable.',
+      paragraph:
+        "Nous sommes une équipe suisse spécialisée dans la visibilité IA et l'automatisation des processus pour les PME. Plutôt que de vous vendre un forfait figé, nous examinons votre entreprise en détail et intervenons là où cela fait la plus grande différence.",
+      points: [
+        {
+          title: 'Made in Switzerland',
+          desc: 'Développement, hébergement et support depuis la Suisse — des circuits courts, un contact direct.',
+        },
+        {
+          title: 'Protection des données selon le droit suisse',
+          desc: 'Vos données sont traitées selon la nLPD et le RGPD — aucune transmission à des tiers sans consentement.',
+        },
+        {
+          title: 'Suivi personnalisé',
+          desc: "Un interlocuteur fixe plutôt que des tickets de support qui changent.",
+        },
+      ],
+    },
+    testimonials: {
+      title: 'Ce que disent nos clients',
+      subtitle: 'Retours d’exemple — de vrais témoignages clients arrivent bientôt.',
+      badge: 'Exemple',
+      items: [
+        {
+          quote:
+            "Nous savons désormais comment nous apparaissons dans ChatGPT & co. — et ce qu'il faut faire pour y rester visibles.",
+          name: 'A. B.',
+          role: 'Propriétaire, fiduciaire',
+        },
+        {
+          quote: 'Le traitement des factures se fait maintenant automatiquement. Cela nous fait gagner plusieurs heures par semaine.',
+          name: 'S. M.',
+          role: 'Directrice, entreprise artisanale',
+        },
+        {
+          quote: "Le chatbot IA répond aux questions les plus fréquentes des clients — même en dehors des heures d'ouverture.",
+          name: 'D. R.',
+          role: 'Responsable marketing, PME',
+        },
+      ],
+    },
+    faq: {
+      title: 'Questions fréquentes',
+      subtitle: 'Les réponses aux questions qu’on nous pose le plus souvent.',
+      items: [
+        {
+          q: 'Combien de temps dure un projet IA ?',
+          a: "L'audit de visibilité est terminé en une semaine. L'optimisation et l'automatisation continues sont des processus permanents — les premiers résultats sont généralement visibles après 4 à 6 semaines.",
+        },
+        {
+          q: 'Où mes données sont-elles stockées ?',
+          a: 'Vos données sont hébergées en Suisse et traitées selon la nLPD et le RGPD. Les détails figurent dans notre politique de confidentialité.',
+        },
+        {
+          q: 'Dois-je m’engager sur la durée ?',
+          a: "Non. L'audit est une offre ponctuelle, et les forfaits mensuels sont résiliables à tout moment.",
+        },
+        {
+          q: 'Dans quelles langues travaillez-vous ?',
+          a: 'Nous travaillons en allemand, anglais, français et italien — adapté à la clientèle suisse.',
+        },
+        {
+          q: "Ai-je besoin de connaissances techniques ?",
+          a: "Non. Nous prenons en charge la mise en œuvre technique ; vous devez seulement connaître votre entreprise et vos objectifs.",
+        },
+        {
+          q: 'Comment démarrer ?',
+          a: "Le plus simple est un premier entretien gratuit de 45 minutes, où nous clarifions votre situation de départ et les prochaines étapes.",
+        },
+      ],
+    },
     pricing: {
       title: 'Des prix transparents',
       subtitle: 'Choisissez la formule adaptée à votre entreprise. Résiliable à tout moment.',
@@ -385,6 +648,87 @@ export const translations: Record<Lang, Translation> = {
         {
           title: 'Assistente IA',
           desc: 'Un chatbot IA risponde alle domande dei clienti 24 ore su 24 — cordiale, preciso e in quattro lingue.',
+        },
+      ],
+    },
+    stats: {
+      items: [
+        { value: 4, suffix: '', label: 'Lingue supportate' },
+        { value: 24, suffix: '/7', label: 'Disponibilità IA possibile' },
+        { value: 100, suffix: '%', label: 'Hosting & supporto in Svizzera' },
+        { value: 45, suffix: ' min.', label: 'prima consulenza gratuita' },
+      ],
+    },
+    about: {
+      title: 'Perché SwissAI Optimize',
+      subtitle: 'Qualità svizzera, protezione dei dati svizzera — e un team sempre raggiungibile.',
+      paragraph:
+        'Siamo un team svizzero specializzato in visibilità IA e automazione dei processi per le PMI. Invece di venderle un pacchetto fisso, analizziamo a fondo la sua azienda e interveniamo dove fa la differenza maggiore.',
+      points: [
+        {
+          title: 'Made in Switzerland',
+          desc: 'Sviluppo, hosting e supporto dalla Svizzera — percorsi brevi, contatto diretto.',
+        },
+        {
+          title: 'Protezione dei dati secondo il diritto svizzero',
+          desc: 'I suoi dati vengono trattati secondo nLPD e GDPR — nessuna condivisione con terzi senza consenso.',
+        },
+        {
+          title: 'Assistenza personale',
+          desc: 'Un referente fisso invece di ticket di supporto sempre diversi.',
+        },
+      ],
+    },
+    testimonials: {
+      title: 'Cosa dicono i nostri clienti',
+      subtitle: 'Feedback esemplificativi — presto arriveranno testimonianze reali.',
+      badge: 'Esempio',
+      items: [
+        {
+          quote:
+            'Ora sappiamo come compariamo su ChatGPT & co. — e cosa dobbiamo fare per restare visibili.',
+          name: 'A. B.',
+          role: 'Titolare, studio fiduciario',
+        },
+        {
+          quote: 'La gestione delle fatture ora è automatica. Ci fa risparmiare diverse ore ogni settimana.',
+          name: 'S. M.',
+          role: 'Direttrice, azienda artigianale',
+        },
+        {
+          quote: 'Il chatbot IA risponde alle domande più frequenti dei clienti — anche fuori orario.',
+          name: 'D. R.',
+          role: 'Responsabile marketing, PMI',
+        },
+      ],
+    },
+    faq: {
+      title: 'Domande frequenti',
+      subtitle: 'Le risposte alle domande che ci vengono poste più spesso.',
+      items: [
+        {
+          q: 'Quanto dura un progetto IA?',
+          a: "L'audit di visibilità si conclude entro una settimana. Ottimizzazione e automazione continue sono processi costanti — i primi risultati si vedono di solito entro 4-6 settimane.",
+        },
+        {
+          q: 'Dove vengono salvati i miei dati?',
+          a: "I suoi dati sono ospitati in Svizzera e trattati secondo nLPD e GDPR. I dettagli sono nella nostra informativa sulla privacy.",
+        },
+        {
+          q: 'Devo vincolarmi a lungo termine?',
+          a: "No. L'audit è un'offerta una tantum, i pacchetti mensili sono disdicibili in qualsiasi momento.",
+        },
+        {
+          q: 'In quali lingue lavorate?',
+          a: 'Lavoriamo in tedesco, inglese, francese e italiano — su misura per la clientela svizzera.',
+        },
+        {
+          q: 'Servono conoscenze tecniche?',
+          a: "No. Ci occupiamo noi della realizzazione tecnica; lei deve solo conoscere la sua azienda e i suoi obiettivi.",
+        },
+        {
+          q: 'Come iniziamo?',
+          a: "Il modo più semplice è un primo colloquio gratuito di 45 minuti, in cui chiariamo la situazione di partenza e i prossimi passi.",
         },
       ],
     },
