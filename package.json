@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && tsc -p api && vite build",
-    "typecheck:api": "tsc -p api",
+    "build": "tsc && tsc -p api.tsconfig.json && vite build",
+    "typecheck:api": "tsc -p api.tsconfig.json",
     "test": "vitest run",
     "preview": "vite preview"
   },

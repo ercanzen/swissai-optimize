@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { isValidAuditPayload } from './audit'
+import { isValidAuditPayload } from '../audit'
 
 function basePayload() {
   return {
