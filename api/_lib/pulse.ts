@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { escapeHtml } from './notify'
-import type { StoredLead } from './store'
+import { escapeHtml } from './notify.js'
+import type { StoredLead } from './store.js'
 
 const MODEL = 'claude-sonnet-4-6'
 

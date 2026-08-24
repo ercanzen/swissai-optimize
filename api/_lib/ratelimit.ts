@@ -1,5 +1,5 @@
 import { Ratelimit } from '@upstash/ratelimit'
-import { getRedis } from './store'
+import { getRedis } from './store.js'
 
 export interface RateLimitResult {
   allowed: boolean

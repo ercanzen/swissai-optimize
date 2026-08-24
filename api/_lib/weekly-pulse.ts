@@ -1,7 +1,7 @@
-import { getAllAuditLeads, markPulseSent, type StoredLead } from './store'
-import { sendEmail } from './notify'
-import { createUnsubscribeToken } from './unsubscribe-token'
-import { generatePulse, renderPulseHtml } from './pulse'
+import { getAllAuditLeads, markPulseSent, type StoredLead } from './store.js'
+import { sendEmail } from './notify.js'
+import { createUnsubscribeToken } from './unsubscribe-token.js'
+import { generatePulse, renderPulseHtml } from './pulse.js'
 
 const PULSE_INTERVAL_DAYS = 6
 const MAX_PER_RUN = 25

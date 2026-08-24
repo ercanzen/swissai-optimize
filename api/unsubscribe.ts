@@ -1,4 +1,4 @@
-import { processUnsubscribe } from './_lib/unsubscribe'
+import { processUnsubscribe } from './_lib/unsubscribe.js'
 
 export default async function handler(req: any, res: any) {
   const email = typeof req.query?.email === 'string' ? req.query.email : ''

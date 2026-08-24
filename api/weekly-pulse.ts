@@ -1,4 +1,4 @@
-import { runWeeklyPulse } from './_lib/weekly-pulse'
+import { runWeeklyPulse } from './_lib/weekly-pulse.js'
 
 export default async function handler(req: any, res: any) {
   const cronSecret = process.env.CRON_SECRET

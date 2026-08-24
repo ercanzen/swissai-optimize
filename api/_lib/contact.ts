@@ -1,4 +1,4 @@
-import { sendLeadEmail, escapeHtml } from './notify'
+import { sendLeadEmail, escapeHtml } from './notify.js'
 
 export interface ContactFormData {
   name: string

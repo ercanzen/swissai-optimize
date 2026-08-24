@@ -1,4 +1,4 @@
-import { submitContactForm, type ContactFormData } from './_lib/contact'
+import { submitContactForm, type ContactFormData } from './_lib/contact.js'
 
 const MAX_SHORT_FIELD = 200
 const MAX_MESSAGE = 5000

@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
-import { sendLeadEmail, escapeHtml } from './notify'
-import { saveAuditLead } from './store'
+import { sendLeadEmail, escapeHtml } from './notify.js'
+import { saveAuditLead } from './store.js'
 
 const MODEL = 'claude-sonnet-4-6'
 

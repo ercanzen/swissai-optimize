@@ -1,5 +1,5 @@
-import { generateAuditReport, type AuditFormData } from './_lib/audit'
-import { checkAuditRateLimit, clientIp } from './_lib/ratelimit'
+import { generateAuditReport, type AuditFormData } from './_lib/audit.js'
+import { checkAuditRateLimit, clientIp } from './_lib/ratelimit.js'
 
 const MAX_SHORT_FIELD = 200
 const MAX_HERAUSFORDERUNGEN = 20
