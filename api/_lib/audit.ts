@@ -178,11 +178,15 @@ export async function generateAuditReport(data: AuditFormData): Promise<AuditRes
   let sichtbarkeit = FALLBACK_SICHTBARKEIT
 
   if (process.env.ANTHROPIC_API_KEY) {
-    const client = new Anthropic()
-    ;[empfehlungen, sichtbarkeit] = await Promise.all([
-      generateRecommendations(client, data, lang),
-      checkVisibility(client, data, lang),
-    ])
+    try {
+      const client = new Anthropic()
+      ;[empfehlungen, sichtbarkeit] = await Promise.all([
+        generateRecommendations(client, data, lang),
+        checkVisibility(client, data, lang),
+      ])
+    } catch (err) {
+      console.error('Claude-Bericht fehlgeschlagen, Fallback wird verwendet:', err)
+    }
   }
 
   try {
