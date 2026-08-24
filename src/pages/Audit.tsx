@@ -1,18 +1,9 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import type { Lang, Translation } from '../i18n'
+import { MITARBEITERZAHLEN } from '../i18n'
 import './Audit.css'
-
-const BRANCHEN = ['Gastronomie', 'Detailhandel', 'Gesundheit', 'Immobilien', 'Beratung', 'Andere']
-const MITARBEITERZAHLEN = ['1-5', '6-20', '21-50', '50+']
-const HERAUSFORDERUNGEN = [
-  'E-Mails beantworten',
-  'Terminplanung',
-  'Angebote erstellen',
-  'Kundenanfragen',
-  'Berichte und Auswertungen',
-  'Social Media / Content',
-]
 
 interface AuditFormData {
   firma: string
@@ -57,7 +48,14 @@ function effortBadgeClass(aufwand: string) {
   return 'audit-badge audit-badge-effort-hoch'
 }
 
-export default function Audit() {
+function effortLabel(aufwand: string, t: Translation) {
+  const key = aufwand.toLowerCase()
+  if (key === 'niedrig') return t.audit.effortLevels.niedrig
+  if (key === 'mittel') return t.audit.effortLevels.mittel
+  return t.audit.effortLevels.hoch
+}
+
+export default function Audit({ lang, t }: { lang: Lang; t: Translation }) {
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [phase, setPhase] = useState<Phase>('form')
   const [data, setData] = useState<AuditFormData>(initialData)
@@ -87,15 +85,15 @@ export default function Audit() {
       const res = await fetch('/api/audit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, lang }),
       })
       const json = await res.json()
-      if (!res.ok) throw new Error(json.error || 'Der Audit konnte nicht erstellt werden.')
+      if (!res.ok) throw new Error(json.error || t.audit.unknownError)
       setResults(json.empfehlungen)
       setVisibility(json.sichtbarkeit)
       setPhase('results')
     } catch (err) {
-      setErrorMessage(err instanceof Error ? err.message : 'Unbekannter Fehler')
+      setErrorMessage(err instanceof Error ? err.message : t.audit.unknownError)
       setPhase('error')
     }
   }
@@ -113,16 +111,16 @@ export default function Audit() {
     <div className="audit-page">
       <div className="audit-container">
         <div className="audit-header">
-          <h1 className="audit-title">Kostenloser KI-Audit</h1>
-          <p className="audit-subtitle">
-            In 2 Minuten erfahren Sie, welche KI-Automatisierungen Ihr Unternehmen voranbringen.
-          </p>
+          <h1 className="audit-title">{t.audit.pageTitle}</h1>
+          <p className="audit-subtitle">{t.audit.pageSubtitle}</p>
         </div>
 
         {phase === 'form' && (
           <>
             <div className="audit-steps">
-              <span className="audit-step-label">Schritt {step}/3</span>
+              <span className="audit-step-label">
+                {t.audit.stepLabel} {step}/3
+              </span>
               {[1, 2, 3].map((n) => (
                 <span
                   key={n}
@@ -141,23 +139,23 @@ export default function Audit() {
                     exit={{ opacity: 0, x: -16 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h2 className="audit-step-title">Ihr Unternehmen</h2>
+                    <h2 className="audit-step-title">{t.audit.step1Title}</h2>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="firma">
-                        Firmenname
+                        {t.audit.firmaLabel}
                       </label>
                       <input
                         id="firma"
                         type="text"
                         className="audit-input"
-                        placeholder="Ihre Firma AG"
+                        placeholder={t.audit.firmaPlaceholder}
                         value={data.firma}
                         onChange={(e) => setData({ ...data, firma: e.target.value })}
                       />
                     </div>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="website">
-                        Website URL
+                        {t.audit.websiteLabel}
                       </label>
                       <input
                         id="website"
@@ -170,7 +168,7 @@ export default function Audit() {
                     </div>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="branche">
-                        Branche
+                        {t.audit.brancheLabel}
                       </label>
                       <select
                         id="branche"
@@ -179,9 +177,9 @@ export default function Audit() {
                         onChange={(e) => setData({ ...data, branche: e.target.value })}
                       >
                         <option value="" disabled>
-                          Bitte wählen
+                          {t.audit.branchePlaceholder}
                         </option>
-                        {BRANCHEN.map((b) => (
+                        {t.audit.branchen.map((b) => (
                           <option key={b} value={b}>
                             {b}
                           </option>
@@ -190,7 +188,7 @@ export default function Audit() {
                     </div>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="mitarbeiterzahl">
-                        Mitarbeiterzahl
+                        {t.audit.mitarbeiterzahlLabel}
                       </label>
                       <select
                         id="mitarbeiterzahl"
@@ -199,7 +197,7 @@ export default function Audit() {
                         onChange={(e) => setData({ ...data, mitarbeiterzahl: e.target.value })}
                       >
                         <option value="" disabled>
-                          Bitte wählen
+                          {t.audit.branchePlaceholder}
                         </option>
                         {MITARBEITERZAHLEN.map((m) => (
                           <option key={m} value={m}>
@@ -215,7 +213,7 @@ export default function Audit() {
                         disabled={!canProceedStep1}
                         onClick={() => setStep(2)}
                       >
-                        Weiter →
+                        {t.audit.weiter}
                       </button>
                     </div>
                   </motion.div>
@@ -229,9 +227,9 @@ export default function Audit() {
                     exit={{ opacity: 0, x: -16 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h2 className="audit-step-title">Herausforderungen</h2>
+                    <h2 className="audit-step-title">{t.audit.step2Title}</h2>
                     <div className="audit-checkbox-list">
-                      {HERAUSFORDERUNGEN.map((item) => {
+                      {t.audit.herausforderungenList.map((item) => {
                         const checked = data.herausforderungen.includes(item)
                         return (
                           <label key={item} className={`audit-checkbox-item ${checked ? 'is-checked' : ''}`}>
@@ -244,9 +242,11 @@ export default function Audit() {
                     <div className="audit-field">
                       <div className="audit-slider-row">
                         <label className="audit-label" htmlFor="stunden" style={{ marginBottom: 0 }}>
-                          Zeitaufwand pro Woche
+                          {t.audit.stundenLabel}
                         </label>
-                        <span className="audit-slider-value">{data.stundenProWoche} Std.</span>
+                        <span className="audit-slider-value">
+                          {data.stundenProWoche} {t.audit.stundenUnit}
+                        </span>
                       </div>
                       <input
                         id="stunden"
@@ -261,7 +261,7 @@ export default function Audit() {
                     </div>
                     <div className="audit-actions">
                       <button type="button" className="audit-btn audit-btn-secondary" onClick={() => setStep(1)}>
-                        Zurück
+                        {t.audit.zurueck}
                       </button>
                       <button
                         type="button"
@@ -269,7 +269,7 @@ export default function Audit() {
                         disabled={!canProceedStep2}
                         onClick={() => setStep(3)}
                       >
-                        Weiter →
+                        {t.audit.weiter}
                       </button>
                     </div>
                   </motion.div>
@@ -284,10 +284,10 @@ export default function Audit() {
                     transition={{ duration: 0.3 }}
                     onSubmit={submitAudit}
                   >
-                    <h2 className="audit-step-title">Kontakt</h2>
+                    <h2 className="audit-step-title">{t.audit.step3Title}</h2>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="name">
-                        Name
+                        {t.audit.nameLabel}
                       </label>
                       <input
                         id="name"
@@ -300,7 +300,7 @@ export default function Audit() {
                     </div>
                     <div className="audit-field">
                       <label className="audit-label" htmlFor="email">
-                        E-Mail
+                        {t.audit.emailLabel}
                       </label>
                       <input
                         id="email"
@@ -313,10 +313,10 @@ export default function Audit() {
                     </div>
                     <div className="audit-actions">
                       <button type="button" className="audit-btn audit-btn-secondary" onClick={() => setStep(2)}>
-                        Zurück
+                        {t.audit.zurueck}
                       </button>
                       <button type="submit" className="audit-btn audit-btn-primary" disabled={!canSubmit}>
-                        Audit anfordern →
+                        {t.audit.auditAnfordern}
                       </button>
                     </div>
                   </motion.form>
@@ -330,7 +330,7 @@ export default function Audit() {
           <div className="audit-card">
             <div className="audit-loading">
               <div className="audit-spinner" />
-              <p className="audit-loading-text">Ihr KI-Audit wird erstellt...</p>
+              <p className="audit-loading-text">{t.audit.loadingText}</p>
             </div>
           </div>
         )}
@@ -340,7 +340,7 @@ export default function Audit() {
             <div className="audit-error">
               <p className="audit-error-text">{errorMessage}</p>
               <button type="button" className="audit-btn audit-btn-primary" onClick={() => setPhase('form')}>
-                Erneut versuchen
+                {t.audit.errorRetry}
               </button>
             </div>
           </div>
@@ -353,20 +353,18 @@ export default function Audit() {
                 <span className="audit-visibility-icon">{visibility.bekannt ? '✅' : '❌'}</span>
                 <div>
                   <h3 className={`audit-visibility-title ${visibility.bekannt ? 'is-known' : 'is-unknown'}`}>
-                    {visibility.bekannt
-                      ? `Claude kennt ${data.firma}`
-                      : `Claude kennt ${data.firma} nicht`}
+                    {(visibility.bekannt ? t.audit.visibilityKnown : t.audit.visibilityUnknown).replace(
+                      '{firma}',
+                      data.firma,
+                    )}
                   </h3>
                   <p className="audit-visibility-text">{visibility.hinweis}</p>
-                  <p className="audit-visibility-caption">
-                    Basiert auf den Trainingsdaten von Claude — ein Indikator für Ihre KI-Sichtbarkeit, kein
-                    Live-Check von ChatGPT oder Perplexity.
-                  </p>
+                  <p className="audit-visibility-caption">{t.audit.visibilityCaption}</p>
                 </div>
               </div>
             )}
             <div className="audit-results-intro">
-              <p className="audit-subtitle">Ihre drei konkreten Automatisierungsempfehlungen:</p>
+              <p className="audit-subtitle">{t.audit.resultsIntro}</p>
             </div>
             <div className="audit-results-grid">
               {results.map((r, i) => (
@@ -375,14 +373,16 @@ export default function Audit() {
                   <p className="audit-result-problem">{r.problem}</p>
                   <div className="audit-result-badges">
                     <span className="audit-badge audit-badge-time">{r.zeitersparnis}</span>
-                    <span className={effortBadgeClass(r.aufwand)}>Aufwand: {r.aufwand}</span>
+                    <span className={effortBadgeClass(r.aufwand)}>
+                      {t.audit.effortPrefix} {effortLabel(r.aufwand, t)}
+                    </span>
                   </div>
                 </div>
               ))}
             </div>
             <div className="audit-results-cta">
               <a href="/#contact" className="audit-btn audit-btn-primary">
-                Jetzt umsetzen – Beratung buchen →
+                {t.audit.ctaImplement}
               </a>
               <div style={{ marginTop: '16px' }}>
                 <button
@@ -397,7 +397,7 @@ export default function Audit() {
                     textDecoration: 'underline',
                   }}
                 >
-                  Neuen Audit starten
+                  {t.audit.restartAudit}
                 </button>
               </div>
             </div>

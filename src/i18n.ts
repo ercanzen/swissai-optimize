@@ -74,7 +74,43 @@ export interface Translation {
     impressum: string
     address: string
   }
+  audit: {
+    pageTitle: string
+    pageSubtitle: string
+    stepLabel: string
+    step1Title: string
+    step2Title: string
+    step3Title: string
+    firmaLabel: string
+    firmaPlaceholder: string
+    websiteLabel: string
+    branchePlaceholder: string
+    brancheLabel: string
+    branchen: string[]
+    mitarbeiterzahlLabel: string
+    herausforderungenList: string[]
+    stundenLabel: string
+    stundenUnit: string
+    nameLabel: string
+    emailLabel: string
+    weiter: string
+    zurueck: string
+    auditAnfordern: string
+    loadingText: string
+    errorRetry: string
+    unknownError: string
+    visibilityKnown: string
+    visibilityUnknown: string
+    visibilityCaption: string
+    resultsIntro: string
+    effortPrefix: string
+    effortLevels: { niedrig: string; mittel: string; hoch: string }
+    ctaImplement: string
+    restartAudit: string
+  }
 }
+
+export const MITARBEITERZAHLEN = ['1-5', '6-20', '21-50', '50+']
 
 const NAV = {
   de: ['leistungen', 'preise', 'kontakt'],
@@ -261,6 +297,48 @@ export const translations: Record<Lang, Translation> = {
       impressum: 'Impressum',
       address: 'Zollikofen, Bern',
     },
+    audit: {
+      pageTitle: 'Kostenloser KI-Audit',
+      pageSubtitle: 'In 2 Minuten erfahren Sie, welche KI-Automatisierungen Ihr Unternehmen voranbringen.',
+      stepLabel: 'Schritt',
+      step1Title: 'Ihr Unternehmen',
+      step2Title: 'Herausforderungen',
+      step3Title: 'Kontakt',
+      firmaLabel: 'Firmenname',
+      firmaPlaceholder: 'Ihre Firma AG',
+      websiteLabel: 'Website URL',
+      branchePlaceholder: 'Bitte wählen',
+      brancheLabel: 'Branche',
+      branchen: ['Gastronomie', 'Detailhandel', 'Gesundheit', 'Immobilien', 'Beratung', 'Andere'],
+      mitarbeiterzahlLabel: 'Mitarbeiterzahl',
+      herausforderungenList: [
+        'E-Mails beantworten',
+        'Terminplanung',
+        'Angebote erstellen',
+        'Kundenanfragen',
+        'Berichte und Auswertungen',
+        'Social Media / Content',
+      ],
+      stundenLabel: 'Zeitaufwand pro Woche',
+      stundenUnit: 'Std.',
+      nameLabel: 'Name',
+      emailLabel: 'E-Mail',
+      weiter: 'Weiter →',
+      zurueck: 'Zurück',
+      auditAnfordern: 'Audit anfordern →',
+      loadingText: 'Ihr KI-Audit wird erstellt...',
+      errorRetry: 'Erneut versuchen',
+      unknownError: 'Unbekannter Fehler',
+      visibilityKnown: 'Claude kennt {firma}',
+      visibilityUnknown: 'Claude kennt {firma} nicht',
+      visibilityCaption:
+        'Basiert auf den Trainingsdaten von Claude — ein Indikator für Ihre KI-Sichtbarkeit, kein Live-Check von ChatGPT oder Perplexity.',
+      resultsIntro: 'Ihre drei konkreten Automatisierungsempfehlungen:',
+      effortPrefix: 'Aufwand:',
+      effortLevels: { niedrig: 'Niedrig', mittel: 'Mittel', hoch: 'Hoch' },
+      ctaImplement: 'Jetzt umsetzen – Beratung buchen →',
+      restartAudit: 'Neuen Audit starten',
+    },
   },
   en: {
     nav: NAV.en,
@@ -438,6 +516,48 @@ export const translations: Record<Lang, Translation> = {
       datenschutz: 'Privacy policy',
       impressum: 'Legal notice',
       address: 'Zollikofen, Bern',
+    },
+    audit: {
+      pageTitle: 'Free AI Audit',
+      pageSubtitle: 'In 2 minutes, find out which AI automations will move your business forward.',
+      stepLabel: 'Step',
+      step1Title: 'Your company',
+      step2Title: 'Challenges',
+      step3Title: 'Contact',
+      firmaLabel: 'Company name',
+      firmaPlaceholder: 'Your Company Ltd.',
+      websiteLabel: 'Website URL',
+      branchePlaceholder: 'Please select',
+      brancheLabel: 'Industry',
+      branchen: ['Hospitality', 'Retail', 'Healthcare', 'Real estate', 'Consulting', 'Other'],
+      mitarbeiterzahlLabel: 'Number of employees',
+      herausforderungenList: [
+        'Answering emails',
+        'Scheduling appointments',
+        'Creating quotes',
+        'Customer inquiries',
+        'Reports and analytics',
+        'Social media / content',
+      ],
+      stundenLabel: 'Time spent per week',
+      stundenUnit: 'hrs',
+      nameLabel: 'Name',
+      emailLabel: 'Email',
+      weiter: 'Next →',
+      zurueck: 'Back',
+      auditAnfordern: 'Request audit →',
+      loadingText: 'Your AI audit is being created...',
+      errorRetry: 'Try again',
+      unknownError: 'Unknown error',
+      visibilityKnown: 'Claude knows {firma}',
+      visibilityUnknown: "Claude doesn't know {firma}",
+      visibilityCaption:
+        "Based on Claude's training data — an indicator of your AI visibility, not a live check of ChatGPT or Perplexity.",
+      resultsIntro: 'Your three concrete automation recommendations:',
+      effortPrefix: 'Effort:',
+      effortLevels: { niedrig: 'Low', mittel: 'Medium', hoch: 'High' },
+      ctaImplement: 'Implement now – book a consultation →',
+      restartAudit: 'Start new audit',
     },
   },
   fr: {
@@ -617,6 +737,48 @@ export const translations: Record<Lang, Translation> = {
       impressum: 'Impressum',
       address: 'Zollikofen, Berne',
     },
+    audit: {
+      pageTitle: 'Audit IA gratuit',
+      pageSubtitle: 'En 2 minutes, découvrez quelles automatisations IA feront avancer votre entreprise.',
+      stepLabel: 'Étape',
+      step1Title: 'Votre entreprise',
+      step2Title: 'Défis',
+      step3Title: 'Contact',
+      firmaLabel: "Nom de l'entreprise",
+      firmaPlaceholder: 'Votre Entreprise SA',
+      websiteLabel: 'URL du site web',
+      branchePlaceholder: 'Veuillez choisir',
+      brancheLabel: 'Secteur',
+      branchen: ['Restauration', 'Commerce de détail', 'Santé', 'Immobilier', 'Conseil', 'Autre'],
+      mitarbeiterzahlLabel: "Nombre d'employés",
+      herausforderungenList: [
+        'Répondre aux e-mails',
+        'Planification des rendez-vous',
+        'Création de devis',
+        'Demandes clients',
+        'Rapports et analyses',
+        'Réseaux sociaux / contenu',
+      ],
+      stundenLabel: 'Temps consacré par semaine',
+      stundenUnit: 'h',
+      nameLabel: 'Nom',
+      emailLabel: 'E-mail',
+      weiter: 'Suivant →',
+      zurueck: 'Retour',
+      auditAnfordern: "Demander l'audit →",
+      loadingText: 'Votre audit IA est en cours de création...',
+      errorRetry: 'Réessayer',
+      unknownError: 'Erreur inconnue',
+      visibilityKnown: 'Claude connaît {firma}',
+      visibilityUnknown: 'Claude ne connaît pas {firma}',
+      visibilityCaption:
+        "Basé sur les données d'entraînement de Claude — un indicateur de votre visibilité IA, pas une vérification en direct de ChatGPT ou Perplexity.",
+      resultsIntro: "Vos trois recommandations d'automatisation concrètes :",
+      effortPrefix: 'Effort :',
+      effortLevels: { niedrig: 'Faible', mittel: 'Moyen', hoch: 'Élevé' },
+      ctaImplement: 'Mettre en œuvre – réserver une consultation →',
+      restartAudit: 'Nouvel audit',
+    },
   },
   it: {
     nav: NAV.it,
@@ -794,6 +956,48 @@ export const translations: Record<Lang, Translation> = {
       datenschutz: 'Privacy',
       impressum: 'Impressum',
       address: 'Zollikofen, Berna',
+    },
+    audit: {
+      pageTitle: 'Audit IA gratuito',
+      pageSubtitle: 'In 2 minuti scopri quali automazioni IA fanno crescere la tua azienda.',
+      stepLabel: 'Passo',
+      step1Title: 'La tua azienda',
+      step2Title: 'Sfide',
+      step3Title: 'Contatto',
+      firmaLabel: 'Nome azienda',
+      firmaPlaceholder: 'La Tua Azienda SA',
+      websiteLabel: 'URL del sito web',
+      branchePlaceholder: 'Seleziona',
+      brancheLabel: 'Settore',
+      branchen: ['Ristorazione', 'Commercio al dettaglio', 'Sanità', 'Immobiliare', 'Consulenza', 'Altro'],
+      mitarbeiterzahlLabel: 'Numero di dipendenti',
+      herausforderungenList: [
+        'Rispondere alle e-mail',
+        'Pianificazione degli appuntamenti',
+        'Creazione di preventivi',
+        'Richieste dei clienti',
+        'Report e analisi',
+        'Social media / contenuti',
+      ],
+      stundenLabel: 'Tempo impiegato a settimana',
+      stundenUnit: 'ore',
+      nameLabel: 'Nome',
+      emailLabel: 'E-mail',
+      weiter: 'Avanti →',
+      zurueck: 'Indietro',
+      auditAnfordern: 'Richiedi audit →',
+      loadingText: "Il tuo audit IA è in fase di creazione...",
+      errorRetry: 'Riprova',
+      unknownError: 'Errore sconosciuto',
+      visibilityKnown: 'Claude conosce {firma}',
+      visibilityUnknown: 'Claude non conosce {firma}',
+      visibilityCaption:
+        'Basato sui dati di addestramento di Claude — un indicatore della tua visibilità IA, non una verifica in tempo reale di ChatGPT o Perplexity.',
+      resultsIntro: 'I tuoi tre consigli concreti di automazione:',
+      effortPrefix: 'Impegno:',
+      effortLevels: { niedrig: 'Basso', mittel: 'Medio', hoch: 'Alto' },
+      ctaImplement: 'Implementa ora – prenota una consulenza →',
+      restartAudit: 'Nuovo audit',
     },
   },
 }

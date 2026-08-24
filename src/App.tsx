@@ -32,7 +32,7 @@ export default function App() {
       <Navbar t={t} lang={lang} setLang={setLang} />
       <Routes>
         <Route path="/" element={<Landing t={t} />} />
-        <Route path="/audit" element={<Audit />} />
+        <Route path="/audit" element={<Audit lang={lang} t={t} />} />
         <Route path="/impressum" element={<Impressum />} />
         <Route path="/datenschutz" element={<Datenschutz />} />
       </Routes>

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && tsc -p api && vite build",
+    "typecheck:api": "tsc -p api",
+    "test": "vitest run",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -14,13 +16,15 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.110.0",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/outfit": "^5.2.8",
     "@tailwindcss/vite": "^4.3.2",
+    "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.38.0",
     "lucide-react": "^1.23.0",
     "motion": "^12.42.2",

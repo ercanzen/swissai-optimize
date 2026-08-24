@@ -6,7 +6,7 @@ import { generatePulse, renderPulseHtml } from './pulse'
 const PULSE_INTERVAL_DAYS = 6
 const MAX_PER_RUN = 25
 
-function isDue(lead: StoredLead, now: number): boolean {
+export function isDue(lead: StoredLead, now: number): boolean {
   if (lead.unsubscribed) return false
   if (!lead.lastPulseAt) return true
   const days = (now - new Date(lead.lastPulseAt).getTime()) / (1000 * 60 * 60 * 24)

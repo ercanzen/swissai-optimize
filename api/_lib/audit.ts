@@ -4,8 +4,21 @@ import { saveAuditLead } from './store'
 
 const MODEL = 'claude-sonnet-4-6'
 
+type Lang = 'de' | 'en' | 'fr' | 'it'
+
+const LANGUAGE_NAMES: Record<Lang, string> = {
+  de: 'Deutsch',
+  en: 'Englisch (English)',
+  fr: 'Französisch (français)',
+  it: 'Italienisch (italiano)',
+}
+
+function languageInstruction(lang: Lang): string {
+  return ` WICHTIG: Antworte ausschliesslich auf ${LANGUAGE_NAMES[lang]}, unabhängig von der Sprache der Eingabedaten.`
+}
+
 const RECOMMENDATIONS_SYSTEM_PROMPT =
-  'Du bist ein KI-Automatisierungsexperte für Schweizer KMU. Analysiere die Angaben und erstelle einen kurzen, konkreten Audit-Bericht auf Deutsch. Format: 3 konkrete Automatisierungsempfehlungen mit je: Titel, Problem das gelöst wird, geschätzte Zeitersparnis pro Woche, Implementierungsaufwand (Niedrig/Mittel/Hoch). Sei spezifisch und praxisnah.'
+  'Du bist ein KI-Automatisierungsexperte für Schweizer KMU. Analysiere die Angaben und erstelle einen kurzen, konkreten Audit-Bericht. Format: 3 konkrete Automatisierungsempfehlungen mit je: Titel, Problem das gelöst wird, geschätzte Zeitersparnis pro Woche, Implementierungsaufwand (Niedrig/Mittel/Hoch). Sei spezifisch und praxisnah.'
 
 const RECOMMENDATIONS_TOOL: Anthropic.Tool = {
   name: 'audit_bericht',
@@ -64,6 +77,7 @@ export interface AuditFormData {
   stundenProWoche: number
   name: string
   email: string
+  lang?: Lang
 }
 
 export interface AuditRecommendation {
@@ -83,11 +97,19 @@ export interface AuditResult {
   sichtbarkeit: VisibilityCheck
 }
 
-async function generateRecommendations(client: Anthropic, data: AuditFormData): Promise<AuditRecommendation[]> {
+function resolveLang(lang: unknown): Lang {
+  return lang === 'en' || lang === 'fr' || lang === 'it' ? lang : 'de'
+}
+
+async function generateRecommendations(
+  client: Anthropic,
+  data: AuditFormData,
+  lang: Lang,
+): Promise<AuditRecommendation[]> {
   const message = await client.messages.create({
     model: MODEL,
     max_tokens: 1000,
-    system: RECOMMENDATIONS_SYSTEM_PROMPT,
+    system: RECOMMENDATIONS_SYSTEM_PROMPT + languageInstruction(lang),
     tools: [RECOMMENDATIONS_TOOL],
     tool_choice: { type: 'tool', name: 'audit_bericht' },
     messages: [{ role: 'user', content: JSON.stringify(data) }],
@@ -101,11 +123,11 @@ async function generateRecommendations(client: Anthropic, data: AuditFormData): 
   return (toolUse.input as { empfehlungen: AuditRecommendation[] }).empfehlungen
 }
 
-async function checkVisibility(client: Anthropic, data: AuditFormData): Promise<VisibilityCheck> {
+async function checkVisibility(client: Anthropic, data: AuditFormData, lang: Lang): Promise<VisibilityCheck> {
   const message = await client.messages.create({
     model: MODEL,
     max_tokens: 300,
-    system: VISIBILITY_SYSTEM_PROMPT,
+    system: VISIBILITY_SYSTEM_PROMPT + languageInstruction(lang),
     tools: [VISIBILITY_TOOL],
     tool_choice: { type: 'tool', name: 'sichtbarkeits_check' },
     messages: [
@@ -132,10 +154,11 @@ export async function generateAuditReport(data: AuditFormData): Promise<AuditRes
   }
 
   const client = new Anthropic()
+  const lang = resolveLang(data.lang)
 
   const [empfehlungen, sichtbarkeit] = await Promise.all([
-    generateRecommendations(client, data),
-    checkVisibility(client, data),
+    generateRecommendations(client, data, lang),
+    checkVisibility(client, data, lang),
   ])
 
   try {
