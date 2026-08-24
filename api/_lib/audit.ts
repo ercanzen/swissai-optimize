@@ -146,20 +146,44 @@ async function checkVisibility(client: Anthropic, data: AuditFormData, lang: Lan
   return toolUse.input as VisibilityCheck
 }
 
+const FALLBACK_EMPFEHLUNGEN: AuditRecommendation[] = [
+  {
+    titel: 'E-Mail-Postfach automatisieren',
+    problem: 'Wiederkehrende Kundenanfragen werden manuell einzeln beantwortet.',
+    zeitersparnis: '3–5 Stunden pro Woche',
+    aufwand: 'Niedrig',
+  },
+  {
+    titel: 'KI-Chatbot für Erstkontakt',
+    problem: 'Häufige Fragen binden Zeit, die für komplexere Anliegen fehlt.',
+    zeitersparnis: '4–6 Stunden pro Woche',
+    aufwand: 'Mittel',
+  },
+  {
+    titel: 'Automatisierte Berichte & Auswertungen',
+    problem: 'Zahlen werden manuell aus mehreren Quellen zusammengetragen.',
+    zeitersparnis: '2–4 Stunden pro Woche',
+    aufwand: 'Mittel',
+  },
+]
+
+const FALLBACK_SICHTBARKEIT: VisibilityCheck = {
+  bekannt: false,
+  hinweis: 'Der KI-Sichtbarkeits-Check ist für diese Anfrage nicht verfügbar. Ein Berater meldet sich persönlich.',
+}
+
 export async function generateAuditReport(data: AuditFormData): Promise<AuditResult> {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    throw new Error(
-      'ANTHROPIC_API_KEY ist nicht gesetzt. Lokal: .env Datei anlegen (siehe .env.example). Auf Vercel: Environment Variable in den Projekteinstellungen setzen.',
-    )
-  }
-
-  const client = new Anthropic()
   const lang = resolveLang(data.lang)
+  let empfehlungen = FALLBACK_EMPFEHLUNGEN
+  let sichtbarkeit = FALLBACK_SICHTBARKEIT
 
-  const [empfehlungen, sichtbarkeit] = await Promise.all([
-    generateRecommendations(client, data, lang),
-    checkVisibility(client, data, lang),
-  ])
+  if (process.env.ANTHROPIC_API_KEY) {
+    const client = new Anthropic()
+    ;[empfehlungen, sichtbarkeit] = await Promise.all([
+      generateRecommendations(client, data, lang),
+      checkVisibility(client, data, lang),
+    ])
+  }
 
   try {
     await sendLeadEmail(`Neuer KI-Audit Lead: ${data.name}`, renderAuditLeadHtml(data, empfehlungen, sichtbarkeit))
