@@ -191,11 +191,6 @@ export default function Hero({ t }: { t: Translation }) {
           </motion.div>
         </div>
       </div>
-
-      {/* Edge anchor — bottom right */}
-      <div className="absolute bottom-6 right-6 md:right-10 z-10 text-[11px] tracking-widest text-zinc-500 lowercase">
-        {t.cornerRight}
-      </div>
     </section>
   )
 }
