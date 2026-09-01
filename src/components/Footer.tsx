@@ -43,7 +43,7 @@ export default function Footer({ t }: { t: Translation }) {
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-4 text-center">
-          <span className="text-[12px] text-zinc-400">© 2026 SwissAI Optimize – {t.footer.address}</span>
+          <span className="text-[12px] text-zinc-400">© 2026 SwissAI Optimize</span>
         </div>
       </div>
     </footer>
