@@ -1,5 +1,5 @@
 import robotsParser from 'robots-parser'
-import type { CheckResult, Evidence, Issue } from '../types'
+import type { CheckResult, Evidence, Issue } from '../types.js'
 
 const AI_BOTS = [
   { name: 'GPTBot', vendor: 'OpenAI' },

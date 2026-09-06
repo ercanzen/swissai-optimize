@@ -1,13 +1,13 @@
-import { resolvePublicTarget, fetchHtml, fetchText, urlExists } from './fetcher'
-import { checkCrawlerAccess } from './checks/crawlerAccess'
-import { checkSitemap } from './checks/sitemap'
-import { extractHeadInfo, checkTechnicalMetaHygiene, checkMetaQuality } from './checks/metadata'
-import { checkStructuredData } from './checks/structuredData'
-import { checkContentStructure } from './checks/contentStructure'
-import { combineCategory, computeOverallScore, buildRecommendations, sortIssuesBySeverity } from './scoring'
-import { checkAiVisibility } from './aiVisibility'
-import { findCompetitors } from './competitors'
-import type { AuditReport, Issue } from './types'
+import { resolvePublicTarget, fetchHtml, fetchText, urlExists } from './fetcher.js'
+import { checkCrawlerAccess } from './checks/crawlerAccess.js'
+import { checkSitemap } from './checks/sitemap.js'
+import { extractHeadInfo, checkTechnicalMetaHygiene, checkMetaQuality } from './checks/metadata.js'
+import { checkStructuredData } from './checks/structuredData.js'
+import { checkContentStructure } from './checks/contentStructure.js'
+import { combineCategory, computeOverallScore, buildRecommendations, sortIssuesBySeverity } from './scoring.js'
+import { checkAiVisibility } from './aiVisibility.js'
+import { findCompetitors } from './competitors.js'
+import type { AuditReport, Issue } from './types.js'
 
 export interface RunAuditInput {
   website: string

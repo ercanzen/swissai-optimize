@@ -1,4 +1,4 @@
-import type { CheckResult, Evidence, Issue, Recommendation } from './types'
+import type { CheckResult, Evidence, Issue, Recommendation } from './types.js'
 
 /** Overall = weighted mean of the three free categories. ai_visibility_score is excluded while it's
  *  null (no Anthropic credit) — a missing measurement must never silently drag the score down. */

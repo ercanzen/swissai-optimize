@@ -1,4 +1,4 @@
-import type { CheckResult, Evidence, Issue } from '../types'
+import type { CheckResult, Evidence, Issue } from '../types.js'
 
 const SITEMAP_POINTS = 25
 const FRESHNESS_BONUS = 10 // included within SITEMAP_POINTS, not additive

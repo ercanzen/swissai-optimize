@@ -1,5 +1,5 @@
 import * as cheerio from 'cheerio'
-import type { CheckResult, Evidence, Issue } from '../types'
+import type { CheckResult, Evidence, Issue } from '../types.js'
 
 const HEADING_POINTS = 25
 const QUESTION_HEADING_POINTS = 20

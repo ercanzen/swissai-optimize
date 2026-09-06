@@ -1,5 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk'
-import type { Competitor } from './types'
+import type { Competitor } from './types.js'
 
 const MODEL = 'claude-sonnet-4-6'
 const MAX_COMPETITORS = 5

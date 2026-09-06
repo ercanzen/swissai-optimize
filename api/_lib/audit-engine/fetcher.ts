@@ -1,6 +1,6 @@
 import dns from 'node:dns/promises'
 import net from 'node:net'
-import type { FetchedPage } from './types'
+import type { FetchedPage } from './types.js'
 
 const USER_AGENT = 'SwissAIOptimizeAuditBot/1.0 (+https://swissai-optimize.ch)'
 const FETCH_TIMEOUT_MS = 6000
