@@ -412,7 +412,225 @@
   text-align: center;
 }
 
+/* Score dashboard */
+.audit-score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.audit-score-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fafafa;
+}
+
+.audit-score-card.is-overall {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+}
+
+.audit-score-card.is-overall .audit-score-value,
+.audit-score-card.is-overall .audit-score-label {
+  color: #ffffff;
+}
+
+.audit-score-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.audit-score-card.is-good:not(.is-overall) .audit-score-value {
+  color: #2e7d32;
+}
+
+.audit-score-card.is-medium:not(.is-overall) .audit-score-value {
+  color: #f57f17;
+}
+
+.audit-score-card.is-bad:not(.is-overall) .audit-score-value {
+  color: #c62828;
+}
+
+.audit-score-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #999999;
+}
+
+/* AI Visibility banner */
+.audit-ai-visibility-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fafafa;
+  margin-bottom: 32px;
+}
+
+.audit-ai-visibility-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.audit-ai-visibility-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.audit-ai-visibility-pending {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.audit-ai-visibility-pending > span:first-child {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #999999;
+}
+
+.audit-ai-visibility-caption {
+  font-size: 0.6875rem;
+  color: #bbbbbb;
+}
+
+/* Issues */
+.audit-issues {
+  margin-bottom: 28px;
+}
+
+.audit-issues-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  margin: 0 0 16px;
+}
+
+.audit-issues-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.audit-issue-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+.audit-severity-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.audit-severity-critical {
+  background: #c62828;
+}
+
+.audit-severity-high {
+  background: #e65100;
+}
+
+.audit-severity-medium {
+  background: #f57f17;
+}
+
+.audit-severity-low {
+  background: #9e9e9e;
+}
+
+.audit-severity-passed {
+  background: #2e7d32;
+}
+
+.audit-issue-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.audit-issue-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.audit-issue-severity {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #999999;
+}
+
+.audit-issue-message {
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  line-height: 1.5;
+}
+
+.audit-issue-evidence {
+  margin: 8px 0 0;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #666666;
+  background: #fafafa;
+  border-left: 2px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+/* Competitors */
+.audit-competitors {
+  margin-bottom: 28px;
+}
+
+.audit-competitors-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 @media (max-width: 768px) {
+  .audit-score-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .audit-ai-visibility-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .audit-ai-visibility-pending {
+    align-items: flex-start;
+  }
+
   .audit-page {
     padding: 120px 16px 80px;
   }

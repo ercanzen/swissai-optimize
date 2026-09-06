@@ -107,6 +107,17 @@ export interface Translation {
     effortLevels: { niedrig: string; mittel: string; hoch: string }
     ctaImplement: string
     restartAudit: string
+    report: {
+      scoreLabels: { overall: string; technical: string; geo: string; content: string }
+      aiVisibilityTitle: string
+      aiVisibilityNotMeasured: string
+      aiVisibilityComingSoon: string
+      issuesTitle: string
+      severityLabels: { critical: string; high: string; medium: string; low: string; passed: string }
+      evidenceLabel: string
+      competitorsTitle: string
+      competitorsEmpty: string
+    }
   }
 }
 
@@ -338,6 +349,17 @@ export const translations: Record<Lang, Translation> = {
       effortLevels: { niedrig: 'Niedrig', mittel: 'Mittel', hoch: 'Hoch' },
       ctaImplement: 'Jetzt umsetzen – Beratung buchen →',
       restartAudit: 'Neuen Audit starten',
+      report: {
+        scoreLabels: { overall: 'Gesamt', technical: 'Technisch', geo: 'GEO', content: 'Inhalt' },
+        aiVisibilityTitle: 'KI-Sichtbarkeit',
+        aiVisibilityNotMeasured: 'Noch nicht gemessen',
+        aiVisibilityComingSoon: 'Kommt bald als Pro-Funktion.',
+        issuesTitle: 'Befunde',
+        severityLabels: { critical: 'Kritisch', high: 'Hoch', medium: 'Mittel', low: 'Niedrig', passed: 'Erfüllt' },
+        evidenceLabel: 'Beleg',
+        competitorsTitle: 'Wettbewerber',
+        competitorsEmpty: 'Noch keine Wettbewerber ermittelt.',
+      },
     },
   },
   en: {
@@ -558,6 +580,17 @@ export const translations: Record<Lang, Translation> = {
       effortLevels: { niedrig: 'Low', mittel: 'Medium', hoch: 'High' },
       ctaImplement: 'Implement now – book a consultation →',
       restartAudit: 'Start new audit',
+      report: {
+        scoreLabels: { overall: 'Overall', technical: 'Technical', geo: 'GEO', content: 'Content' },
+        aiVisibilityTitle: 'AI Visibility',
+        aiVisibilityNotMeasured: 'Not measured yet',
+        aiVisibilityComingSoon: 'Coming soon as a Pro feature.',
+        issuesTitle: 'Findings',
+        severityLabels: { critical: 'Critical', high: 'High', medium: 'Medium', low: 'Low', passed: 'Passed' },
+        evidenceLabel: 'Evidence',
+        competitorsTitle: 'Competitors',
+        competitorsEmpty: 'No competitors identified yet.',
+      },
     },
   },
   fr: {
@@ -778,6 +811,17 @@ export const translations: Record<Lang, Translation> = {
       effortLevels: { niedrig: 'Faible', mittel: 'Moyen', hoch: 'Élevé' },
       ctaImplement: 'Mettre en œuvre – réserver une consultation →',
       restartAudit: 'Nouvel audit',
+      report: {
+        scoreLabels: { overall: 'Global', technical: 'Technique', geo: 'GEO', content: 'Contenu' },
+        aiVisibilityTitle: 'Visibilité IA',
+        aiVisibilityNotMeasured: 'Pas encore mesuré',
+        aiVisibilityComingSoon: 'Bientôt disponible en fonctionnalité Pro.',
+        issuesTitle: 'Constats',
+        severityLabels: { critical: 'Critique', high: 'Élevé', medium: 'Moyen', low: 'Faible', passed: 'Conforme' },
+        evidenceLabel: 'Preuve',
+        competitorsTitle: 'Concurrents',
+        competitorsEmpty: "Aucun concurrent identifié pour l'instant.",
+      },
     },
   },
   it: {
@@ -998,6 +1042,17 @@ export const translations: Record<Lang, Translation> = {
       effortLevels: { niedrig: 'Basso', mittel: 'Medio', hoch: 'Alto' },
       ctaImplement: 'Implementa ora – prenota una consulenza →',
       restartAudit: 'Nuovo audit',
+      report: {
+        scoreLabels: { overall: 'Complessivo', technical: 'Tecnico', geo: 'GEO', content: 'Contenuto' },
+        aiVisibilityTitle: 'Visibilità IA',
+        aiVisibilityNotMeasured: 'Non ancora misurato',
+        aiVisibilityComingSoon: 'Presto disponibile come funzione Pro.',
+        issuesTitle: 'Riscontri',
+        severityLabels: { critical: 'Critico', high: 'Alto', medium: 'Medio', low: 'Basso', passed: 'Superato' },
+        evidenceLabel: 'Prova',
+        competitorsTitle: 'Concorrenti',
+        competitorsEmpty: 'Nessun concorrente identificato per ora.',
+      },
     },
   },
 }

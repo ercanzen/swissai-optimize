@@ -16,16 +16,39 @@ interface AuditFormData {
   email: string
 }
 
-interface AuditRecommendation {
-  titel: string
-  problem: string
-  zeitersparnis: string
-  aufwand: 'Niedrig' | 'Mittel' | 'Hoch'
+type Severity = 'critical' | 'high' | 'medium' | 'low' | 'passed'
+type ReportCategory = 'geo' | 'technical' | 'content' | 'ai_visibility'
+
+interface Evidence {
+  id: string
+  type: string
+  source: string
+  snippet: string
 }
 
-interface VisibilityCheck {
-  bekannt: boolean
-  hinweis: string
+interface Issue {
+  id: string
+  category: ReportCategory
+  severity: Severity
+  message: string
+  evidenceId?: string
+}
+
+interface Competitor {
+  name: string
+  domain?: string
+  mentionedBy?: string
+}
+
+interface AuditReport {
+  overall_score: number
+  geo_score: number
+  technical_score: number
+  content_score: number
+  ai_visibility_score: number | null
+  issues: Issue[]
+  evidence: Evidence[]
+  competitors: Competitor[]
 }
 
 type Phase = 'form' | 'loading' | 'results' | 'error'
@@ -41,26 +64,25 @@ const initialData: AuditFormData = {
   email: '',
 }
 
-function effortBadgeClass(aufwand: string) {
-  const key = aufwand.toLowerCase()
-  if (key === 'niedrig') return 'audit-badge audit-badge-effort-niedrig'
-  if (key === 'mittel') return 'audit-badge audit-badge-effort-mittel'
-  return 'audit-badge audit-badge-effort-hoch'
+function severityClass(severity: Severity) {
+  return `audit-severity-dot audit-severity-${severity}`
 }
 
-function effortLabel(aufwand: string, t: Translation) {
-  const key = aufwand.toLowerCase()
-  if (key === 'niedrig') return t.audit.effortLevels.niedrig
-  if (key === 'mittel') return t.audit.effortLevels.mittel
-  return t.audit.effortLevels.hoch
+function severityLabel(severity: Severity, t: Translation) {
+  return t.audit.report.severityLabels[severity]
+}
+
+function scoreTone(score: number) {
+  if (score >= 80) return 'is-good'
+  if (score >= 50) return 'is-medium'
+  return 'is-bad'
 }
 
 export default function Audit({ lang, t }: { lang: Lang; t: Translation }) {
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [phase, setPhase] = useState<Phase>('form')
   const [data, setData] = useState<AuditFormData>(initialData)
-  const [results, setResults] = useState<AuditRecommendation[]>([])
-  const [visibility, setVisibility] = useState<VisibilityCheck | null>(null)
+  const [report, setReport] = useState<AuditReport | null>(null)
   const [errorMessage, setErrorMessage] = useState('')
 
   const toggleHerausforderung = (item: string) => {
@@ -89,8 +111,7 @@ export default function Audit({ lang, t }: { lang: Lang; t: Translation }) {
       })
       const json = await res.json()
       if (!res.ok) throw new Error(json.error || t.audit.unknownError)
-      setResults(json.empfehlungen)
-      setVisibility(json.sichtbarkeit)
+      setReport(json as AuditReport)
       setPhase('results')
     } catch (err) {
       setErrorMessage(err instanceof Error ? err.message : t.audit.unknownError)
@@ -102,8 +123,7 @@ export default function Audit({ lang, t }: { lang: Lang; t: Translation }) {
     setStep(1)
     setPhase('form')
     setData(initialData)
-    setResults([])
-    setVisibility(null)
+    setReport(null)
     setErrorMessage('')
   }
 
@@ -346,40 +366,73 @@ export default function Audit({ lang, t }: { lang: Lang; t: Translation }) {
           </div>
         )}
 
-        {phase === 'results' && (
+        {phase === 'results' && report && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            {visibility && (
-              <div className={`audit-visibility-card ${visibility.bekannt ? 'is-known' : 'is-unknown'}`}>
-                <span className="audit-visibility-icon">{visibility.bekannt ? '✅' : '❌'}</span>
-                <div>
-                  <h3 className={`audit-visibility-title ${visibility.bekannt ? 'is-known' : 'is-unknown'}`}>
-                    {(visibility.bekannt ? t.audit.visibilityKnown : t.audit.visibilityUnknown).replace(
-                      '{firma}',
-                      data.firma,
-                    )}
-                  </h3>
-                  <p className="audit-visibility-text">{visibility.hinweis}</p>
-                  <p className="audit-visibility-caption">{t.audit.visibilityCaption}</p>
+            <div className="audit-score-grid">
+              <div className={`audit-score-card is-overall ${scoreTone(report.overall_score)}`}>
+                <span className="audit-score-value">{report.overall_score}</span>
+                <span className="audit-score-label">{t.audit.report.scoreLabels.overall}</span>
+              </div>
+              <div className={`audit-score-card ${scoreTone(report.technical_score)}`}>
+                <span className="audit-score-value">{report.technical_score}</span>
+                <span className="audit-score-label">{t.audit.report.scoreLabels.technical}</span>
+              </div>
+              <div className={`audit-score-card ${scoreTone(report.geo_score)}`}>
+                <span className="audit-score-value">{report.geo_score}</span>
+                <span className="audit-score-label">{t.audit.report.scoreLabels.geo}</span>
+              </div>
+              <div className={`audit-score-card ${scoreTone(report.content_score)}`}>
+                <span className="audit-score-value">{report.content_score}</span>
+                <span className="audit-score-label">{t.audit.report.scoreLabels.content}</span>
+              </div>
+            </div>
+
+            <div className="audit-ai-visibility-banner">
+              <span className="audit-ai-visibility-title">{t.audit.report.aiVisibilityTitle}</span>
+              {report.ai_visibility_score !== null ? (
+                <span className="audit-ai-visibility-value">{report.ai_visibility_score}/100</span>
+              ) : (
+                <div className="audit-ai-visibility-pending">
+                  <span>{t.audit.report.aiVisibilityNotMeasured}</span>
+                  <span className="audit-ai-visibility-caption">{t.audit.report.aiVisibilityComingSoon}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="audit-issues">
+              <h3 className="audit-issues-title">{t.audit.report.issuesTitle}</h3>
+              <ul className="audit-issues-list">
+                {report.issues.map((issue) => {
+                  const evidence = issue.evidenceId ? report.evidence.find((e) => e.id === issue.evidenceId) : undefined
+                  return (
+                    <li key={issue.id} className="audit-issue-item">
+                      <span className={severityClass(issue.severity)} aria-hidden="true" />
+                      <div className="audit-issue-body">
+                        <div className="audit-issue-header">
+                          <span className="audit-issue-severity">{severityLabel(issue.severity, t)}</span>
+                          <span className="audit-issue-message">{issue.message}</span>
+                        </div>
+                        {evidence && <blockquote className="audit-issue-evidence">{t.audit.report.evidenceLabel}: {evidence.snippet}</blockquote>}
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+
+            {report.competitors.length > 0 && (
+              <div className="audit-competitors">
+                <h3 className="audit-issues-title">{t.audit.report.competitorsTitle}</h3>
+                <div className="audit-competitors-list">
+                  {report.competitors.map((c) => (
+                    <span className="audit-badge audit-badge-time" key={c.name}>
+                      {c.name}
+                    </span>
+                  ))}
                 </div>
               </div>
             )}
-            <div className="audit-results-intro">
-              <p className="audit-subtitle">{t.audit.resultsIntro}</p>
-            </div>
-            <div className="audit-results-grid">
-              {results.map((r, i) => (
-                <div className="audit-result-card" key={i}>
-                  <h3 className="audit-result-title">{r.titel}</h3>
-                  <p className="audit-result-problem">{r.problem}</p>
-                  <div className="audit-result-badges">
-                    <span className="audit-badge audit-badge-time">{r.zeitersparnis}</span>
-                    <span className={effortBadgeClass(r.aufwand)}>
-                      {t.audit.effortPrefix} {effortLabel(r.aufwand, t)}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
+
             <div className="audit-results-cta">
               <a href="/#contact" className="audit-btn audit-btn-primary">
                 {t.audit.ctaImplement}
